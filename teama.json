@@ -14,6 +14,16 @@
         "paid": false,
         "description":""
       }
+    ],
+    "contact": [
+      {
+        "type": "github",
+        "userName": "lofferman",
+      },
+      {
+        "type": "email",
+        "userName": "test@test.com",
+      }
     ]
   }
 }

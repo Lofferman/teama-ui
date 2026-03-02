@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "team": {
+    "name": "Teama",
+    "tagline": "A collaboration platform, connecting visionaries to creators",
+    "details": "",
+    "techStack": ["SvelteKit", "TypseScript"],
+    "thumbnail": "https://raw.githubusercontent.com/Lofferman/teama-ui/refs/heads/master/src/lib/assets/Vector.png",
+    "lookingForRoles": [
+      {
+        "role": "UX",
+        "experience": "intermediate",
+        "commitment": "part-time",
+        "paid": false,
+        "description":""
+      }
+    ],
+    "contact": [
+      {
+        "type": "github",
+        "userName": "lofferman",
+      },
+      {
+        "type": "email",
+        "userName": "test@test.com",
+      }
+    ]
+  }
+}

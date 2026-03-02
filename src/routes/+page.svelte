@@ -1,26 +1,40 @@
-<script>
-	import FeaturedProjects from "$lib/components/featuredProjects.svelte";
-	import Footer from "$lib/components/footer.svelte";
-	import Nav from "$lib/components/nav.svelte";
-      import "./layout.css";
+<script lang="ts">
+    import ProjectList from "$lib/components/projectList.svelte";
+	import RepoTable from "$lib/components/repoTable.svelte";
+    import type { LayoutServerData } from "./$types";
+    import "./layout.css";
+    let { children, data }: { children: any; data: LayoutServerData } = $props();
+  let searchCriteria = $state('');
+    let filteredRepos = $derived(
+        searchCriteria 
+            ? data.teamaRepos.filter(teamaRepo => 
+                JSON.stringify(teamaRepo).toLowerCase().includes(searchCriteria.toLowerCase())
+            )
+            : data.teamaRepos
+    );
 </script>
 
-<Nav></Nav>
-<div class="hero bg-gray-600 text-white min-h-screen">
-  <div class="hero-content text-center">
+<div class="hero bg-neutral h-100">
+  <div class="hero-content text-center w-full">
     <div class="w-full">
       <h1 class="text-5xl font-bold">Dive in</h1>
       <p class="py-6">
-        Conecting people to projects
+        Connecting people to projects
       </p>
-    <div class="join">
-        <input type="text" placeholder="Search initiatives" class="input join-item w-[400px]" />
-        <button class="btn btn-neutral join-item">explore</button>
-    </div>
-    <div class="w-full mt-10">
-        <FeaturedProjects></FeaturedProjects>
-    </div> 
+        <input type="text" bind:value={searchCriteria} placeholder="tech, name, frontend..."  class="input w-full md:w-2xl " />
     </div>
   </div>
 </div>
-<Footer></Footer>
+
+<div class="hero bg-neutral min-h-100  ">
+  <div class="hero-content text-center w-full">
+            
+        {#if filteredRepos && filteredRepos.length > 0}
+          <RepoTable repos={filteredRepos}></RepoTable>
+
+        {:else}
+          <p class="py-6 h-1/3">No repositories found.</p>
+        {/if}
+  
+  </div>
+</div>

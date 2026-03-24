@@ -17,7 +17,7 @@
 <div class="hero bg-neutral h-100">
   <div class="hero-content text-center w-full">
     <div class="w-full">
-      <h1 class="text-5xl font-bold">Dive in</h1>
+      <h1 class="text-5xl font-bold">Explore</h1>
       <p class="py-6">
         Connecting people to projects
       </p>

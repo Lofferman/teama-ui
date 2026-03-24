@@ -67,9 +67,9 @@
 
 					<div class="flex flex-wrap gap-3 mb-6">
 						<a
-							href={data.singleRepo.repoUrl}
+							href={`${data.singleRepo.repoUrl}`}
+							rel="external"
 							target="_blank"
-							rel="noopener noreferrer"
 							class="btn btn-primary"
 						>
 							View on GitHub
@@ -185,18 +185,6 @@
 						<div class="card-body">
 							<h2 class="card-title text-lg mb-4">Repository Info</h2>
 							<div class="space-y-3 text-sm">
-                            {#if data.singleRepo.techStack && data.singleRepo.techStack.length > 0}
-								<div>
-									<span class="font-semibold">Tech Stack:</span>
-									{#if data.singleRepo.techStack && data.singleRepo.techStack.length > 0}
-										<div class="flex flex-wrap gap-2 mt-2">
-											{#each data.singleRepo.techStack as tech}
-												<span class="badge badge-outline">{tech}</span>
-											{/each}
-										</div>
-									{/if}
-								</div>
-                                {/if}
 								<div>
 									<span class="font-semibold">Visibility:</span>
 									<span class="badge badge-sm ml-2" class:badge-error={data.singleRepo.isPrivate}

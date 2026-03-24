@@ -1,13 +1,14 @@
 <script lang="ts">
 	import type { Repo } from "$lib/types/savedRepos";
+    import { resolve } from '$app/paths';
+	import { goto } from "$app/navigation";
 
-    const { repos, searchKey, ownRepos, clickedEdit }: { repos: Repo[], searchKey?: string | null, ownRepos?: boolean, clickedEdit?: (repo: any) => void } = $props();
-    const duplicatedArray = Array.from({ length: 20 }, () => ({ ...repos[0] }));
+    const { repos, ownRepos, clickedEdit }: { repos: Repo[], ownRepos?: boolean, clickedEdit?: (repo: Repo) => void } = $props();
 const limit = 6;
 </script>
 
 <div class="w-full grid grid-cols-4 gap-4 md:grid-cols-8">
-    {#each repos.slice(0, limit) as repo, i}
+    {#each repos.slice(0, limit) as repo, i (i)}
         <div class="card bg-base-100 shadow-md col-span-4" >
             <div class="card-body">
                 {#if repo.thumbnail }
@@ -23,7 +24,7 @@ const limit = 6;
                         <div class="">
                             <div class="flex flex-wrap gap-2">
                             <h3 class="font-semibold text-sm mb-2">Tech Stack:</h3>
-                                {#each repo.techStack as tech}
+                                {#each repo.techStack as tech, j (j)}
                                     <div class="badge badge-outline">{tech}</div>
                                 {/each}
                             </div>
@@ -33,7 +34,7 @@ const limit = 6;
                         <div class=""> 
                             <div class="flex flex-wrap gap-2">
                             <h3 class="font-semibold text-sm mb-2">Looking for:</h3>
-                                {#each repo.lookingForRoles as role}
+                                {#each repo.lookingForRoles as role, k (k)}
                                     <div class="badge badge-outline">
                                         {role.role} - {role.experience}
                                     </div>
@@ -46,16 +47,16 @@ const limit = 6;
                             <button class="btn btn-warning btn-sm" >Remove</button>
                         {/if}
                         {#if ownRepos && clickedEdit}
-                            <button class="btn btn-primary btn-sm" on:click={() => clickedEdit(repo)}>Edit</button>
+                            <button class="btn btn-primary btn-sm" onclick={() => clickedEdit(repo)}>Edit</button>
                         {/if}
                         {#if !ownRepos}
                             <button class="btn btn-accent btn-sm" >Contact</button>
                         {/if}
-                        <a class="btn btn-tertiary btn-sm" href="/repos/{repo.repoSlug}">Repo</a>
+                        <a class="btn btn-tertiary btn-sm" href={resolve(`/repos/${repo.repoSlug}`)}>Repo</a>
                     </div>
                 {/if}
             </div>
         </div>
     {/each}
-    <button class="btn btn-primary col-span-4 md:col-span-8" on:click={() => window.location.href = '/repos/all'}>View All Repos</button>
+    <button class="btn btn-primary col-span-4 md:col-span-8" onclick={() => goto(resolve('/repos/all'))}>View All Repos</button>
 </div>
